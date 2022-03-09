@@ -1,3 +1,4 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import MyButton from "./MyButton";
 
@@ -35,4 +36,5 @@ const DiaryItem = ({ id, emotion, content, date }) => {
   );
 };
 
-export default DiaryItem;
+// 아이템이 re-rendering이 되지 않게 만들어준다.
+export default React.memo(DiaryItem);

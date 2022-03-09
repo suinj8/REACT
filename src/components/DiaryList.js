@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DiaryItem from "./DiaryItem";
 import MyButton from "./MyButton";
@@ -14,7 +14,11 @@ const filterOptionList = [
   { value: "bad", name: "안좋은 감정만" },
 ];
 
-const ControlMenu = ({ value, onChange, optionList }) => {
+// React.memo는 강화된(고차) component를 반환한다 ==> 전달받는 props이 바뀌지 않으면
+// rendering이 일어나지 않게 memoization 해준다. ==> 최적화 기법
+// setState는 rendering이 일어났을 때도 동일한 id를 보장한다.
+// 중간에 handler함수를 사용하지 않는다면 사용가능
+const ControlMenu = React.memo(({ value, onChange, optionList }) => {
   return (
     <select
       className="ControlMenu"
@@ -30,7 +34,7 @@ const ControlMenu = ({ value, onChange, optionList }) => {
       ))}
     </select>
   );
-};
+});
 
 const DiaryList = ({ diaryList }) => {
   const navigate = useNavigate();
